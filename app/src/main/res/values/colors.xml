@@ -3,4 +3,17 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="textColorDetails">#B4BAC0</color>
+    <color name="textColorTitle">#2B3D4D</color>
+
+    <color name="sports">#4A7BA7</color>
+    <color name="football">#3B8CB8</color>
+    <color name="worldNews">#04B4B3</color>
+    <color name="usNews">#F5A623</color>
+    <color name="ukNews">#FF7D50</color>
+    <color name="politics">#E75F40</color>
+    <color name="business">#41FFAA</color>
+
+
 </resources>
