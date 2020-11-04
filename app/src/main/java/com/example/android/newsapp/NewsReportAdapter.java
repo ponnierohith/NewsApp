@@ -49,7 +49,7 @@ class NewsReportAdapter extends ArrayAdapter<NewsReport> {
 
         NewsReport newsReport = getItem(position);
 
-        TextView magnitudeView = (TextView) listItemView.findViewById(R.id.magnitude);
+        TextView magnitudeView = (TextView) listItemView.findViewById(R.id.sectionIndicator);
         magnitudeView.setText(Character.toString(newsReport.sectionName.charAt(0)));
 
         // Set the proper background color on the magnitude circle.
@@ -61,12 +61,12 @@ class NewsReportAdapter extends ArrayAdapter<NewsReport> {
         magnitudeCircle.setColor(magnitudeColor);
 
         // Find the TextView with view ID location
-        TextView primaryLocationView = (TextView) listItemView.findViewById(R.id.primary_location);
+        TextView primaryLocationView = (TextView) listItemView.findViewById(R.id.headline);
         // Display the location of the current earthquake in that TextView
         primaryLocationView.setText(newsReport.headline);
 
         // Find the TextView with view ID location offset
-        TextView locationOffsetView = (TextView) listItemView.findViewById(R.id.location_offset);
+        TextView locationOffsetView = (TextView) listItemView.findViewById(R.id.pillar);
         // Display the location offset of the current earthquake in that TextView
         locationOffsetView.setText(newsReport.pillarName);
 

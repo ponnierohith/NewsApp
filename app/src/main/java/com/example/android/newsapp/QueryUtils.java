@@ -17,6 +17,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class QueryUtils {
@@ -34,8 +35,19 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
         List<NewsReport> newsReports = extractFeatureFromJson(jsonResponse);
-        Collections.sort(newsReports, (o1, o2) -> (o1.pillarName.compareTo(o2.pillarName)));
+        sort(newsReports);
         return newsReports;
+    }
+
+    public static void sort(List<NewsReport> newsReports) {
+        Collections.sort(newsReports, (report1, report2) -> {
+            int result = report1.pillarName.compareTo(report2.pillarName);
+            if (result != 0) return result;
+            result = report1.sectionName.compareTo(report2.sectionName);
+            if (result != 0) return result;
+            result = report2.date.compareTo(report1.date);
+            return result;
+        });
     }
 
     private static URL createUrl(String stringUrl) {
