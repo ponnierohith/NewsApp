@@ -23,6 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsReport>> {
     private final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?&api-key=test";
+    private final String GUARDIAN_BASE_URL = "https://content.guardianapis.com/search?";
 
     private NewsReportAdapter adapter;
     private ListView listView;
@@ -84,7 +85,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     //    @NonNull
     @Override
     public Loader<List<NewsReport>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsReportsLoader(this, GUARDIAN_REQUEST_URL);
+        Uri baseUri = Uri.parse(GUARDIAN_BASE_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", "news");
+        uriBuilder.appendQueryParameter("api-key", "test");
+
+        return new NewsReportsLoader(this, uriBuilder.toString());
     }
 
     @Override
