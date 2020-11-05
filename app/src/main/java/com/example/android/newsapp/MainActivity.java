@@ -75,10 +75,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         loadingIndicator.setVisibility(View.GONE);
         // Set empty state text to display
         emptyStateTextView.setText("No news found.");
-        // Clear the adapter of previous earthquake data
         adapter.clear();
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
         if (data != null && !data.isEmpty()) {
             adapter = new NewsReportAdapter(MainActivity.this, data);
             listView.setAdapter(adapter);

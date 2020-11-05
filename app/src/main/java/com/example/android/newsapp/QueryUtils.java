@@ -145,7 +145,11 @@ public class QueryUtils {
                 String webPublicationDate = currentNews.getString("webPublicationDate");
 
                 NewsReport newsReport = new NewsReport(webTitle, webUrl, pillarName, sectionName, webPublicationDate);
-                newsReports.add(newsReport);
+                if (currentNews.has("author")) {
+                    String authorName = currentNews.getString("author");
+                    newsReport.authorName = authorName;
+                }
+               newsReports.add(newsReport);
             }
 
         } catch (JSONException e) {

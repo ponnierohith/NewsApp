@@ -9,6 +9,7 @@ public class NewsReport {
     public String webUrl;
     public String pillarName;
     public String sectionName;
+    public String authorName;
     public Date date;
 
     public NewsReport(String headline, String webUrl, String pillarName, String sectionName, String webPublicationDate) {
