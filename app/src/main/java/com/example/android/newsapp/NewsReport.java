@@ -1,18 +1,23 @@
 package com.example.android.newsapp;
 
+import androidx.annotation.Nullable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NewsReport {
-    public String headline;
-    public String webUrl;
-    public String pillarName;
-    public String sectionName;
-    public String authorName;
-    public Date date;
+    private String headline;
+    private String webUrl;
+    private String pillarName;
+    private String sectionName;
+    private String authorName;
+    private Date date;
 
-    public NewsReport(String headline, String webUrl, String pillarName, String sectionName, String webPublicationDate) {
+    public NewsReport(String headline) {
+        this.headline = headline;
+    }
+    public NewsReport(String headline, @Nullable String webUrl, @Nullable String pillarName, @Nullable String sectionName, @Nullable String webPublicationDate) {
         this.headline = headline;
         this.webUrl = webUrl;
         this.pillarName = pillarName;
