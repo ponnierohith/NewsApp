@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
     private List<NewsReport> newsReports;
+    private View loadingIndicator = findViewById(R.id.loading_indicator);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +61,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-//         If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
             getLoaderManager().initLoader(1, null, this);
         } else {
             hideLoadingIndicator();
-            // Update empty state with no connection error message
-            emptyStateTextView.setText("No internet connection");
+            emptyStateTextView.setText(R.string.NoInternetConnection);
         }
 
     }
     private void hideLoadingIndicator() {
-        View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
     }
 
@@ -96,11 +91,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewsReport>> loader, List<NewsReport> data) {
-        // Hide loading indicator because the data has been loaded
-        View loadingIndicator = findViewById(R.id.loading_indicator);
-        loadingIndicator.setVisibility(View.GONE);
+        hideLoadingIndicator();
         // Set empty state text to display
-        emptyStateTextView.setText("No news found.");
+        emptyStateTextView.setText(R.string.NoNewsFound);
         adapter.clear();
         if (data != null && !data.isEmpty()) {
             adapter = new NewsReportAdapter(MainActivity.this, data);
