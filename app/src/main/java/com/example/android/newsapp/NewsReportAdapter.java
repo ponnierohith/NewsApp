@@ -36,43 +36,32 @@ class NewsReportAdapter extends ArrayAdapter<NewsReport> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
         NewsReport newsReport = getItem(position);
 
-        TextView headlineView = (TextView) listItemView.findViewById(R.id.headline);
+        TextView headlineView = convertView.findViewById(R.id.headline);
         headlineView.setText(newsReport.getHeadline());
 
-        TextView pillarView = (TextView) listItemView.findViewById(R.id.pillar);
+        TextView pillarView = convertView.findViewById(R.id.pillar);
         pillarView.setText(newsReport.getPillarName());
 
-        TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
+        TextView sectionView = convertView.findViewById(R.id.section);
         sectionView.setText(newsReport.getSectionName());
         sectionView.setTextColor(getSectionColor(newsReport.getSectionName()));
 
-        TextView authorView = (TextView) listItemView.findViewById(R.id.author);
+        TextView authorView = convertView.findViewById(R.id.author);
         authorView.setText(newsReport.getAuthorName());
 
-        // Find the TextView with view ID date
-        TextView dateView = (TextView) listItemView.findViewById(R.id.date);
-        // Format the date string (i.e. "Mar 3, 1984")
-        String formattedDate = formatDate(newsReport.getDate());
-        // Display the date of the current earthquake in that TextView
-        dateView.setText(formattedDate);
+         TextView dateView = convertView.findViewById(R.id.date);
+        dateView.setText(formatDate(newsReport.getDate()));
 
-        // Find the TextView with view ID time
-        TextView timeView = (TextView) listItemView.findViewById(R.id.time);
-        // Format the time string (i.e. "4:30PM")
-        String formattedTime = formatTime(newsReport.getDate());
-        // Display the time of the current earthquake in that TextView
-        timeView.setText(formattedTime);
+        TextView timeView = convertView.findViewById(R.id.time);
+        timeView.setText(formatTime(newsReport.getDate()));
 
-        // Return the list item view that is now showing the appropriate data
-        return listItemView;
+        return convertView;
     }
 
     /**
