@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 NewsReport newsReport = adapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri uri = Uri.parse(newsReport.webUrl);
+                Uri uri = Uri.parse(newsReport.getWebUrl());
 
                 // Create a new intent to view the URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, uri);

@@ -50,29 +50,29 @@ class NewsReportAdapter extends ArrayAdapter<NewsReport> {
         NewsReport newsReport = getItem(position);
 
         TextView headlineView = (TextView) listItemView.findViewById(R.id.headline);
-        headlineView.setText(newsReport.headline);
+        headlineView.setText(newsReport.getHeadline());
 
         TextView pillarView = (TextView) listItemView.findViewById(R.id.pillar);
-        pillarView.setText(newsReport.pillarName);
+        pillarView.setText(newsReport.getPillarName());
 
         TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
-        sectionView.setText(newsReport.sectionName);
-        sectionView.setTextColor(getSectionColor(newsReport.sectionName));
+        sectionView.setText(newsReport.getSectionName());
+        sectionView.setTextColor(getSectionColor(newsReport.getSectionName()));
 
         TextView authorView = (TextView) listItemView.findViewById(R.id.author);
-        authorView.setText(newsReport.authorName);
+        authorView.setText(newsReport.getAuthorName());
 
         // Find the TextView with view ID date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
         // Format the date string (i.e. "Mar 3, 1984")
-        String formattedDate = formatDate(newsReport.date);
+        String formattedDate = formatDate(newsReport.getDate());
         // Display the date of the current earthquake in that TextView
         dateView.setText(formattedDate);
 
         // Find the TextView with view ID time
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
         // Format the time string (i.e. "4:30PM")
-        String formattedTime = formatTime(newsReport.date);
+        String formattedTime = formatTime(newsReport.getDate());
         // Display the time of the current earthquake in that TextView
         timeView.setText(formattedTime);
 
