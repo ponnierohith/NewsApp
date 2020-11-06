@@ -17,17 +17,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class QueryUtils {
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
     public static List<NewsReport> fetchNewsReportData(String requestUrl) {
-        // Create URL object
-        URL url = createUrl(requestUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
+         URL url = createUrl(requestUrl);
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -41,11 +37,11 @@ public class QueryUtils {
 
     public static void sort(List<NewsReport> newsReports) {
         Collections.sort(newsReports, (report1, report2) -> {
-            int result = report1.pillarName.compareTo(report2.pillarName);
+            int result = report1.getPillarName().compareTo(report2.getPillarName());
             if (result != 0) return result;
-            result = report1.sectionName.compareTo(report2.sectionName);
+            result = report1.getSectionName().compareTo(report2.getSectionName());
             if (result != 0) return result;
-            result = report2.date.compareTo(report1.date);
+            result = report2.getDate().compareTo(report1.getDate());
             return result;
         });
     }
@@ -121,14 +117,8 @@ public class QueryUtils {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding newsReports to
         List<NewsReport> newsReports = new ArrayList<>();
-
-        // Try to parse the JSON response string. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-            // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newsReportJSON);
 
             JSONObject responseJsonResponse = baseJsonResponse.getJSONObject("response");
@@ -138,28 +128,26 @@ public class QueryUtils {
 
                 JSONObject currentNews = resultsArray.getJSONObject(i);
 
-                String webTitle = currentNews.getString("webTitle");
-                String webUrl = currentNews.getString("webUrl");
-                String pillarName = currentNews.getString("pillarName");
-                String sectionName = currentNews.getString("sectionName");
-                String webPublicationDate = currentNews.getString("webPublicationDate");
-
-                NewsReport newsReport = new NewsReport(webTitle, webUrl, pillarName, sectionName, webPublicationDate);
-                if (currentNews.has("author")) {
-                    String authorName = currentNews.getString("author");
-                    newsReport.authorName = authorName;
+                NewsReport newsReport = new NewsReport(currentNews.getString("webTitle"));
+                if (currentNews.has("webUrl")) {
+                    newsReport.setWebUrl(currentNews.getString("webUrl"));
+                }
+                if (currentNews.has("pillarName")) {
+                    newsReport.setPillarName(currentNews.getString("pillarName"));
+                }
+                if (currentNews.has("sectionName")) {
+                    newsReport.setSectionName(currentNews.getString("sectionName"));
+                }
+                if (currentNews.has("webPublicationDate")) {
+                    newsReport.setDate(currentNews.getString("webPublicationDate"));
                 }
                newsReports.add(newsReport);
             }
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the JSON results", e);
         }
 
-        // Return the list of earthquakes
         return newsReports;
     }
 
