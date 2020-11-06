@@ -22,6 +22,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsReport>> {
     private final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?&api-key=test";
     private final String GUARDIAN_BASE_URL = "https://content.guardianapis.com/search?";
+    private final String PARAMETER_KEY_QUERY = "q";
+    private final String PARAMETER_VALUE_QUERY = "news";
+    private final String PARAMETER_KEY_APIKEY = "api-key";
+    private final String PARAMETER_VALUE_APIKEY = "test";
+    private final String PARAMETER_KEY_SHOWTAGS = "show-tags";
+    private final String PARAMETER_VALUE_SHOWTAGS = "contributor";
 
     private NewsReportAdapter adapter;
     private ListView listView;
@@ -75,8 +81,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri baseUri = Uri.parse(GUARDIAN_BASE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("q", "news");
-        uriBuilder.appendQueryParameter("api-key", "test");
+        uriBuilder.appendQueryParameter(PARAMETER_KEY_QUERY, PARAMETER_VALUE_QUERY);
+        uriBuilder.appendQueryParameter(PARAMETER_KEY_APIKEY, PARAMETER_VALUE_APIKEY);
+        uriBuilder.appendQueryParameter(PARAMETER_KEY_SHOWTAGS, PARAMETER_VALUE_SHOWTAGS);
 
         return new NewsReportsLoader(this, uriBuilder.toString());
     }

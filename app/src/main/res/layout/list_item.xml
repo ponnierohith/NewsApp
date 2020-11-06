@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingEnd="16dp"
     android:paddingLeft="16dp"
@@ -64,12 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Author"
-            android:ellipsize="end"
             android:gravity="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:textColor="@color/textColorDetails"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

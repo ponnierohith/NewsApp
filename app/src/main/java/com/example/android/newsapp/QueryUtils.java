@@ -141,6 +141,10 @@ public class QueryUtils {
                 if (currentNews.has("webPublicationDate")) {
                     newsReport.setDate(currentNews.getString("webPublicationDate"));
                 }
+                if (currentNews.has("tags")) {
+                    JSONArray tagsArray = currentNews.getJSONArray("tags");
+                    newsReport.setAuthorName(parseAuthorName(tagsArray));
+                }
                 newsReports.add(newsReport);
             }
 
@@ -149,6 +153,23 @@ public class QueryUtils {
         }
 
         return newsReports;
+    }
+
+    private static String parseAuthorName(JSONArray tags) {
+        try {
+            for (int i = 0; i < tags.length(); i++) {
+                JSONObject tag = tags.getJSONObject(i);
+                if (tag.has("type") && (tag.getString("type").contentEquals("contributor"))) {
+                    if (tag.has("webTitle")) return tag.getString("webTitle");
+                    if (tag.has("firstName") && tag.has("lastName"))
+                        return tag.getString("firstName") + tag.getString("lastName");
+                }
+            }
+
+        } catch (JSONException e) {
+            Log.e("QueryUtils", "Problem parsing the JSON tags", e);
+        }
+        return null;
     }
 
 }
