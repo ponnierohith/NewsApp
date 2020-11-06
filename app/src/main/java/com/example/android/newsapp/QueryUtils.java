@@ -37,11 +37,11 @@ public class QueryUtils {
 
     public static void sort(List<NewsReport> newsReports) {
         Collections.sort(newsReports, (report1, report2) -> {
-            int result = report1.getPillarName().compareTo(report2.getPillarName());
-            if (result != 0) return result;
-            result = report1.getSectionName().compareTo(report2.getSectionName());
-            if (result != 0) return result;
-            result = report2.getDate().compareTo(report1.getDate());
+//            int result = report1.getPillarName().compareTo(report2.getPillarName());
+//            if (result != 0) return result;
+//            result = report1.getSectionName().compareTo(report2.getSectionName());
+//            if (result != 0) return result;
+            int result = report2.getDate().compareTo(report1.getDate());
             return result;
         });
     }
