@@ -7,7 +7,6 @@ import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,37 +26,31 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private NewsReportAdapter adapter;
     private ListView listView;
-
-    /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
-    private List<NewsReport> newsReports;
-    private View loadingIndicator = findViewById(R.id.loading_indicator);
+    private View loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_list);
-        listView = (ListView) findViewById(R.id.list);
 
-        emptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        listView = findViewById(R.id.list);
+        emptyStateTextView = findViewById(R.id.empty_view);
+        loadingIndicator = findViewById(R.id.loading_indicator);
+        adapter = new NewsReportAdapter(this, new ArrayList<>());
+
         listView.setEmptyView(emptyStateTextView);
-
-        adapter = new NewsReportAdapter(this, new ArrayList<NewsReport>());
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                NewsReport newsReport = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
+        listView.setOnItemClickListener((adapterView, view, position, l) -> {
+            NewsReport newsReport = adapter.getItem(position);
+            if (newsReport != null) {
                 Uri uri = Uri.parse(newsReport.getWebUrl());
-
-                // Create a new intent to view the URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, uri);
-
-                // Send the intent to launch a new activity
                 startActivity(websiteIntent);
+            }
+            else {
+
             }
         });
 
