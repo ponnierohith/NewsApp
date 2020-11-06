@@ -23,7 +23,7 @@ public class QueryUtils {
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
     public static List<NewsReport> fetchNewsReportData(String requestUrl) {
-         URL url = createUrl(requestUrl);
+        URL url = createUrl(requestUrl);
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -141,7 +141,7 @@ public class QueryUtils {
                 if (currentNews.has("webPublicationDate")) {
                     newsReport.setDate(currentNews.getString("webPublicationDate"));
                 }
-               newsReports.add(newsReport);
+                newsReports.add(newsReport);
             }
 
         } catch (JSONException e) {
