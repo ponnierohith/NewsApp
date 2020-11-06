@@ -16,7 +16,6 @@
 package com.example.android.newsapp;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +30,12 @@ import java.util.List;
 
 class NewsReportAdapter extends ArrayAdapter<NewsReport> {
 
-    private static final String LOCATION_SEPARATOR = " of ";
-
     public NewsReportAdapter(Context context, List<NewsReport> reports) {
         super(context, 0, reports);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if there is an existing list item view (called convertView) that we can reuse,
-        // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
@@ -114,14 +109,10 @@ class NewsReportAdapter extends ArrayAdapter<NewsReport> {
             case "UK news":
                 colorResourceId = R.color.ukNews;
                 break;
-            case "World news":
-                colorResourceId = R.color.worldNews;
-                break;
             default:
                 colorResourceId = R.color.worldNews;
                 break;
         }
-
         return ContextCompat.getColor(getContext(), colorResourceId);
     }
 
