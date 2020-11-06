@@ -31,4 +31,50 @@ public class NewsReport {
         return date;
     }
 
+    public String getHeadline() {
+        return headline;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getPillarName() {
+        return pillarName;
+    }
+
+    public void setPillarName(String pillarName) {
+        this.pillarName = pillarName;
+    }
+
+    public String getSectionName() {
+        return sectionName;
+    }
+
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public void setDate(String webPublicationDate) {
+        this.date = parseDate(webPublicationDate);
+    }
 }
